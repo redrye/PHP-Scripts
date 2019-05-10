@@ -1,23 +1,27 @@
-	<?php
-	function php4_scandir($dir, $listDir = true, $skipDots = false) {
-		$dirArray = array();
-		if ($handle = opendir($dir)) {
-			while (false !== ($file = readdir($handle))) {
-				if (($file != "." && $file != "..") || $skipDots == true) {
-					if ($listDir == false) {
-						if (is_dir($file)) {
-							continue;
-						}
+// Small PHP function for scanning a directory's contents
+// in PHP4...this is more for control than anything in PHP4
+
+<?php
+function php4_scandir($dir, $listDir = true, $skipDots = false) {
+	$dirArray = array();
+	if ($handle = opendir($dir)) {
+		while (false !== ($file = readdir($handle))) {
+			if (($file != "." && $file != "..") || $skipDots == true) {
+				if ($listDir == false) {
+					if (is_dir($file)) {
+						continue;
 					}
-					array_push($dirArray, basename($file));
-					}
-			}
-			closedir($handle);
+				}
+				array_push($dirArray, basename($file));
+				}
 		}
-		return $dirArray;
+		closedir($handle);
 	}
-	$dir = './';
-	?><html>
+	return $dirArray;
+}
+$dir = './';
+?>
+<html>
 
 <table style="width:100%">
 <tr>
